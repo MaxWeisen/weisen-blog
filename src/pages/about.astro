@@ -1,27 +1,57 @@
 ---
+import BaseHead from '@/components/BaseHead.astro'
 
+const pageTitle = 'weisen-blog/about'
+
+const identity = {
+  firstName: 'Max',
+  location: 'Southern California',
+  occupation: 'Software Engineer',
+  hobbies: [
+    'engine building',
+    'camping',
+    'home improvement',
+    'spending time with my dog'
+  ]
+}
+
+const skills = [
+  'JavaScript',
+  'Vue',
+  'React',
+  'Astro',
+  'Ionic',
+  'Vitest',
+  'Jest',
+  'Mysql'
+]
+
+const skillColor = 'navy'
+const fontWeight = 'bold'
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>weisen-blog/about</title>
-	</head>
-	<body>
-		<h1>About Me</h1>
-    <a href="/">Home</a>
-    <a href="/about/">About</a>
-    <a href="/blog/">Blog</a>
-    <p>
-      My name is Max Weisenberger. <br>
-      I am a Software Engineer with 5 years of experience with an emphasis in Frontend Web Development.
-      Early in my career I worked with React. Over the past few years I have spent most of my time
-      using Vue. Though my specialty is in the frontend, I have some experience with backend development.
-      Recently I have been investing more time into Ruby on Rails. This has provided a fun challenge
-      for me to expand my skill set and gain more experience with fullstack development.
-    </p>
-	</body>
+  <head>
+    <BaseHead pageTitle={pageTitle} />
+  </head>
+  <body>
+    <h1>{pageTitle}</h1>
+    <ul>
+      <li>My name is {identity.firstName}.</li>
+      <li>I live in {identity.location} working as a {identity.occupation}.</li>
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Two of my favorite hobbies are
+            {identity.hobbies[0]} and {identity.hobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+
+    <p>My skills are:</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+  </body>
 </html>
